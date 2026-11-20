@@ -56,3 +56,10 @@ file.
 - `read_tcp_file(path)` — read and parse one file.
 - `read_tcp(tcp_path="/proc/net/tcp", tcp6_path="/proc/net/tcp6")` — read
   both files, skipping any that do not exist.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
